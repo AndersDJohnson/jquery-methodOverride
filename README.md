@@ -3,7 +3,7 @@ jquery-methodOverride
 
 More HTTP methods for `jQuery.ajax`, emulated for cross-browser support.
 
-Great for integrating with a RESTful API, 
+Great for integrating with a RESTful API (see [Framework support](#framework-support)).
 
 Uses conventions like the `X-HTTP-Method-Override` header and the hidden `_method` parameter to proxy the lesser-used methods through the fully-supported `GET` and `POST`.
 
