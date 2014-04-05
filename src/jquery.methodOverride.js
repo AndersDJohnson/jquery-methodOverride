@@ -60,8 +60,6 @@
         _method: httpMethod
       }, settings.data);
 
-      console.log(settings);
-
       return $.ajax(settings);
     };
 
