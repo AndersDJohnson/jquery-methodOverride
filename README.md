@@ -76,7 +76,7 @@ Will result in the following enhanced form:
 
 ### Utility
 
-* `$.fn.methodOverride.map`: `function (method:String) -> overrideMethod:String`
+* `$.fn.methodOverride.map`: `function (method:String) : String`
 
     Maps a method to its override method, if any.
 
