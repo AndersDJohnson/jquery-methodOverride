@@ -18,10 +18,10 @@ Uses conventions like the `X-HTTP-Method-Override` header and the hidden `_metho
 
 ## Install
 
-Via bower as `js-loading`.
+Via bower as `jquery-methodOverride`.
 
 ```sh
-bower install --save js-loading
+bower install --save jquery-methodOverride
 ```
 
 ## Usage
