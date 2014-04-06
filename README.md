@@ -16,6 +16,14 @@ Uses conventions like the `X-HTTP-Method-Override` header and the hidden `_metho
 * `HEAD`: `GET`
 * `OPTIONS`: `GET`
 
+## Install
+
+Via bower as `js-loading`.
+
+```sh
+bower install --save js-loading
+```
+
 ## Usage
 
 Include on your page, after jQuery. Supports AMD.
