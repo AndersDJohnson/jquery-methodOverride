@@ -74,6 +74,18 @@ Will result in the following enhanced form:
 </form>
 ```
 
+### Utility
+
+* `$.fn.methodOverride.map`: `function (method:String) -> overrideMethod:String`
+
+    Maps a method to its override method, if any.
+
+
+* `$.fn.methodOverride.methods`: `Object<String,String>`
+
+    The raw object mapping methods to their override methods.
+
+
 ## Framework support
 
 * [Ruby on Rails via `_method` parameter](http://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark)
