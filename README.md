@@ -81,7 +81,7 @@ Will result in the following enhanced form:
     Maps a method to its override method, if any.
 
 
-* `$.fn.methodOverride.methods`: `Object<String,String>`
+* `$.fn.methodOverride.methods`: `Object.<String>`
 
     The raw object mapping methods to their override methods.
 
