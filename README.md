@@ -2,6 +2,7 @@ jquery-methodOverride
 =================
 
 More HTTP methods for `jQuery.ajax`, emulated for cross-browser support.
+Enhance forms with method overrides.
 
 Great for integrating with a RESTful API (see [Framework support](#framework-support)).
 
@@ -25,6 +26,8 @@ Uses conventions like the `X-HTTP-Method-Override` header and the hidden `_metho
 
 Include on your page, after jQuery. Supports AMD.
 
+### Methods
+
 The following methods will become available, which simultaneously support both `$.ajax` and `$.get`/`$.post` APIs.
 
 ```js
@@ -40,3 +43,31 @@ For API details, refer to:
 * [$.get](http://api.jquery.com/jQuery.get/)
 * [$.post](http://api.jquery.com/jQuery.post/)
 
+### Forms
+
+To enhance a form with method override, use `$.fn.methodOverride`.
+
+#### Example
+
+Given the following form:
+
+```html
+<form method="put">
+  <!-- ... -->
+</form>
+```
+
+And adding the following script:
+
+```js
+$('form').methodOverride();
+```
+
+Will result in the following enhanced form:
+
+```html
+<form method="POST" data-method-override="put">
+  <!-- ... -->
+  <input type="hidden" name="_method" value="put">
+</form>
+```

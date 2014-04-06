@@ -19,6 +19,43 @@
     'OPTIONS': 'GET'
   };
 
+  /**
+   * Update a form element, mapping its method attribute,
+   *  and adding hidden _method input.
+   */
+  var methodOverride = function () {
+    this.each(function () {
+      var $form = $(this);
+
+      var method = $form.attr('method');
+      if (method) {
+        var overrideMethod = methodOverride.map(method);
+        if (overrideMethod !== method) {
+          $form.attr('method', overrideMethod);
+          $form.attr('data-method-override', method);
+
+          var $methodInput = $('<input type="hidden" name="_method" />');
+          $methodInput.val(method);
+          $form.append($methodInput);
+        }
+      }
+    });
+  };
+
+  methodOverride.methods = methods;
+
+  /**
+   * Map a method to its override, if any.
+   */
+  methodOverride.map = function (method) {
+    var upperCaseMethod = method.toUpperCase();
+    var overrideMethod;
+    if (methods.hasOwnProperty(upperCaseMethod)) {
+      overrideMethod = methods[upperCaseMethod];
+    }
+    return overrideMethod ? overrideMethod : method;
+  };
+
   $.ajaxPrefilter(function (options, originalOptions, xhr) {
 
     var httpMethod = options.type;
@@ -57,7 +94,7 @@
 
   });
 
-  var out = $.map(methods, function (proxyHttpMethod, httpMethod) {
+  $.map(methods, function (proxyHttpMethod, httpMethod) {
 
     var method = httpMethod.toLowerCase();
 
@@ -84,5 +121,7 @@
     return $[method];
   });
 
-  return out;
+  $.fn.methodOverride = methodOverride;
+
+  return methodOverride;
 }));
