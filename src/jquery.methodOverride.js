@@ -12,53 +12,71 @@
 }(function ($) {
 
   var methods = {
-    'put': 'post',
-    'patch': 'post',
-    'delete': 'post',
-    'head': 'get',
-    'options': 'get'
+    'PUT': 'POST',
+    'PATCH': 'POST',
+    'DELETE': 'POST',
+    'HEAD': 'GET',
+    'OPTIONS': 'GET'
   };
 
-  var out = $.map(methods, function (proxyMethod, method) {
+  $.ajaxPrefilter(function (options, originalOptions, xhr) {
 
-    var httpMethod = method.toUpperCase();
-    var proxyHttpMethod = proxyMethod.toUpperCase();
+    var httpMethod = options.type;
+    var proxyHttpMethod = methods[httpMethod];
+
+    if (proxyHttpMethod) {
+
+      var proxyMethod = proxyHttpMethod.toLowerCase();
+
+      $.extend(options, {
+        type: proxyHttpMethod
+      });
+
+      options.headers = $.extend({
+        "X-HTTP-Method-Override": httpMethod
+      }, options.headers);
+
+      /**
+       * Add _method to data.
+       * TODO: Consider using `$.deparam`: https://gist.github.com/cowboy/1025817
+       * TODO: Does this work with FormData?
+       */
+      var extraData = {
+        _method: httpMethod
+      };
+      var extraDataParam = $.param(extraData);
+
+      if (options.data) {
+        options.data += '&' + extraDataParam;
+      }
+      else {
+        options.data = extraDataParam;
+      }
+
+    }
+
+  });
+
+  var out = $.map(methods, function (proxyHttpMethod, httpMethod) {
+
+    var method = httpMethod.toLowerCase();
 
     $[method] = function (url, data, callback, type) {
 
-      var settings;
-
-      // passing in a settings object
-      if ($.isPlainObject(url)) {
-        settings = url;
-      }
-      else {
-        // shift arguments if data argument was omitted
-        if ( $.isFunction( data ) ) {
-          type = type || callback;
-          callback = data;
-          data = undefined;
-        }
-
-        settings = {
-          url: url,
-          dataType: type,
-          data: data,
-          success: callback
-        };
+      // shift arguments if data argument was omitted
+      if ( $.isFunction( data ) ) {
+        type = type || callback;
+        callback = data;
+        data = undefined;
       }
 
-      settings = $.extend({}, {
-        type: proxyHttpMethod
-      }, settings);
-
-      settings.headers = $.extend({}, {
-        "X-HTTP-Method-Override": httpMethod
-      }, settings.headers);
-
-      settings.data = $.extend({}, {
-        _method: httpMethod
-      }, settings.data);
+      var settings = {
+        url: url,
+        type: httpMethod,
+        dataType: type,
+        data: data,
+        success: callback
+      };
 
       return $.ajax(settings);
     };
