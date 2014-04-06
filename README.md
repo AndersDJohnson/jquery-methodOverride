@@ -16,12 +16,6 @@ Uses conventions like the `X-HTTP-Method-Override` header and the hidden `_metho
 * `HEAD`: `GET`
 * `OPTIONS`: `GET`
 
-## Framework support
-
-* [Ruby on Rails via `_method` parameter](http://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark)
-* [Node.js Express/Connect via methodOverride](http://www.senchalabs.org/connect/methodOverride.html)
-* more...
-
 ## Usage
 
 Include on your page, after jQuery. Supports AMD.
@@ -71,3 +65,9 @@ Will result in the following enhanced form:
   <input type="hidden" name="_method" value="put">
 </form>
 ```
+
+## Framework support
+
+* [Ruby on Rails via `_method` parameter](http://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark)
+* [Node.js Express/Connect via methodOverride](http://www.senchalabs.org/connect/methodOverride.html)
+* more...
