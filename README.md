@@ -10,6 +10,9 @@ Uses conventions like the `X-HTTP-Method-Override` header and the hidden `_metho
 
 
 ## Proxied methods
+
+The "useful" methods from [RFC 2616] are supported, proxied as follows:
+
 * `PUT`: `POST`
 * `PATCH`: `POST`
 * `DELETE`: `POST`
@@ -91,3 +94,5 @@ Will result in the following enhanced form:
 * [Ruby on Rails via `_method` parameter](http://guides.rubyonrails.org/form_helpers.html#how-do-forms-with-patch-put-or-delete-methods-work-questionmark)
 * [Node.js Express/Connect via methodOverride](http://www.senchalabs.org/connect/methodOverride.html)
 * more...
+
+[RFC 2616]: http://www.ietf.org/rfc/rfc2616.txt
